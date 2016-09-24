@@ -28,7 +28,8 @@
   "dependencies": {
     "async": "2.0.x",
     "client-request": "1.1.x",
-    "lodash": "4.16.x"
+    "lodash": "4.16.x",
+    "ws": "~1.1.1"
   },
   "devDependencies": {
     "nodemon": "1.10.x",
