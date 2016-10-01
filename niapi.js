@@ -33,6 +33,19 @@ class Niapi {
     this.url = options.url
   }
 
+  getVersions (cb) {
+    Logger.debug('Niapi::getVersion()')
+
+    const opts = {
+      method: 'GET',
+      uri: `${this.url}/json/version`,
+      json: true,
+      timeout: 1000
+    }
+
+    clientRequest(opts, (err, res, body) => cb(err, body))
+  }
+
   getSessions (cb) {
     Logger.debug('Niapi::getSessions()')
     const opts = {
@@ -42,7 +55,9 @@ class Niapi {
       timeout: 1000
     }
 
-    clientRequest(opts, (err, res, body) => {
+    clientRequest(opts, onRequest)
+
+    function onRequest (err, res, body) {
       if (err) return cb(err)
 
       const result = body.map((sessionData) => {
@@ -51,6 +66,6 @@ class Niapi {
       })
 
       cb(null, result)
-    })
+    }
   }
 }
